@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maquinados GARSO - Maquinados de Precisión Industrial</title>
+    <meta name="description" content="Maquinados GARSO - Especialistas en maquinados de precisión industrial, fabricación de piezas especiales para el sector industrial y automotriz en Puebla, México">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f4c75;
+            --text-light: #e94560;
+            --text-color: #333;
+            --bg-light: #f4f4f4;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.scrolled {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            position: relative;
+        }
+
+        /* Logo animado */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-icon svg {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--white);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo-container:hover .logo-text {
+            color: var(--text-light);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--text-light);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::before {
+            width: 100%;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease 0.1s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-light);
+        }
+
+        /* Botón CTA animado */
+        .cta-button {
+            background: linear-gradient(45deg, var(--text-light), var(--accent-color));
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(233, 69, 96, 0.4);
+        }
+
+        /* Partículas animadas de fondo */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Indicador de progreso */
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--text-light) 0%, var(--accent-color) 100%);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f4f4f4" width="1200" height="600"/><path fill="%23e0e0e0" d="M0 300L50 275L100 300L150 325L200 300L250 275L300 300L350 325L400 300L450 275L500 300L550 325L600 300L650 275L700 300L750 325L800 300L850 275L900 300L950 325L1000 300L1050 275L1100 300L1150 325L1200 300V600H0V300Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--text-light);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .about ul {
+            list-style: none;
+            margin: 1rem 0;
+            padding-left: 0;
+        }
+
+        .about ul li {
+            margin: 0.8rem 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .about ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Mission Vision Section */
+        .mission-vision {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+
+        .mission-vision h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .mv-card {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .mv-card h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Machinery Section */
+        .machinery {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+
+        .machinery h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .machinery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .machine-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .machine-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .machine-specs {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .machine-specs p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            background-color: var(--bg-light);
+            height: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item img.lazy {
+            opacity: 0;
+        }
+
+        .gallery-item img.loaded {
+            opacity: 1;
+        }
+
+        .gallery-item .placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .gallery-item.loaded .placeholder {
+            display: none;
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: white;
+            padding: 25px 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .caption {
+            transform: translateY(0);
+        }
+
+        .caption h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .caption p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--white);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .contact-item {
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .contact-icon {
+            transition: transform 0.3s ease;
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .contact-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .contact-item p {
+            margin: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-item a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0d0d1a;
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+            border-top: 3px solid var(--text-light);
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .about-content {
+                gap: 30px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Header adjustments */
+            header {
+                padding: 0.75rem 0;
+            }
+            
+            nav ul {
+                display: none;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            /* Hero adjustments */
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+                padding: 0 20px;
+            }
+
+            .btn {
+                padding: 10px 24px;
+                font-size: 0.95rem;
+            }
+
+            /* Section padding adjustments */
+            .about,
+            .mission-vision,
+            .services,
+            .machinery,
+            .gallery,
+            .contact {
+                padding: 50px 0;
+            }
+
+            /* Typography adjustments */
+            h2 {
+                font-size: 2rem !important;
+            }
+
+            h3 {
+                font-size: 1.3rem !important;
+            }
+
+            /* About section */
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .about h2 {
+                font-size: 2rem;
+                text-align: center;
+            }
+
+            /* Mission Vision */
+            .mv-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .mv-card {
+                padding: 30px 20px;
+            }
+
+            /* Services grid */
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .service-card {
+                padding: 20px;
+            }
+
+            /* Machinery grid */
+            .machinery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .machine-card {
+                padding: 20px;
+            }
+
+            /* Gallery grid */
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .gallery-item {
+                height: 280px;
+            }
+
+            .gallery-item .caption {
+                font-size: 0.9rem;
+                padding: 20px 15px;
+            }
+
+            .caption h3 {
+                font-size: 1.1rem;
+            }
+
+            .caption p {
+                font-size: 0.85rem;
+            }
+
+            /* Contact section */
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .contact h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            /* Footer */
+            footer {
+                padding: 15px 0;
+                font-size: 0.9rem;
+            }
+
+            nav ul li {
+                margin-left: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* Hamburger menu for mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .hamburger {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: var(--white);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:nth-child(1) {
+            top: 20%;
+        }
+
+        .hamburger:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hamburger:nth-child(3) {
+            bottom: 20%;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(1) {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .menu-toggle.active .hamburger:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(3) {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: relative;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 46, 0.98);
+                flex-direction: column;
+                padding: 2rem 1rem;
+                gap: 1rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                max-height: calc(100vh - 80px);
+                overflow-y: auto;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            nav ul li {
+                margin: 0;
+                width: 100%;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 12px 16px;
+                font-size: 1.1rem;
+                border-radius: 8px;
+                transition: background-color 0.3s ease;
+                text-align: center;
+            }
+
+            nav ul li a:hover {
+                background-color: rgba(233, 69, 96, 0.1);
+            }
+
+            .cta-button {
+                margin-top: 1rem;
+                width: 100%;
+                text-align: center;
+                display: block;
+                padding: 14px 20px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .about h2,
+            .services h2,
+            .machinery h2,
+            .gallery h2,
+            .contact h2 {
+                font-size: 1.8rem !important;
+                margin-bottom: 1.5rem;
+            }
+
+            .mv-card h3,
+            .machine-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .services-grid,
+            .gallery-grid {
+                gap: 15px;
+            }
+
+            .service-card,
+            .machine-card,
+            .mv-card {
+                padding: 15px;
+            }
+
+            .contact-item h3 {
+                font-size: 1.1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .gallery-item {
+                height: 250px;
+            }
+
+            .gallery-item .caption {
+                padding: 15px 12px;
+            }
+
+            .caption h3 {
+                font-size: 1rem;
+            }
+
+            .caption p {
+                font-size: 0.8rem;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .logo-icon {
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="particles" id="particles"></div>
+        <nav class="container">
+            <a href="#inicio" class="logo-container">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: var(--text-light);">
+                        <path d="M15.636 4.364a1.25 1.25 0 0 1 1.768 0l2.232 2.232a1.25 1.25 0 0 1 0 1.768l-.732.732a.25.25 0 0 1-.354 0l-3.5-3.5a.25.25 0 0 1 0-.354l.586-.586zM14.05 5.95a.25.25 0 0 0 0 .354l3.5 3.5a.25.25 0 0 0 .354 0l.732-.732a.25.25 0 0 0 0-.354l-2.232-2.232a.25.25 0 0 0-.354 0l-.586.586a.25.25 0 0 0-.354 0L14.05 5.95zM12.207 7.793a.5.5 0 0 1 .707 0l3.5 3.5a.5.5 0 0 1 0 .707l-8.121 8.121a2 2 0 0 1-1.414.586H4v-2.879a2 2 0 0 1 .586-1.414l8.121-8.121z"/>
+                    </svg>
+                </div>
+                <div class="logo-text">GARSO</div>
+            </a>
+            
+            <ul id="navMenu">
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#maquinaria">Maquinaria</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#contacto" class="cta-button">Cotización</a></li>
+            </ul>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </div>
+        </nav>
+        <div class="progress-bar" id="progressBar"></div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <h1>MAQUINADOS GARSO</h1>
+            <p>Especialistas en maquinados de precisión industrial y fabricación de piezas especiales</p>
+            <a href="#contacto" class="btn">Solicitar Cotización</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div>
+                    <h2>Nuestro Perfil</h2>
+                    <ul>
+                        <li>Somos un negocio dedicado a realizar maquinados de precisión industrial y a la fabricación de piezas especiales, principalmente para el sector industrial y automotriz.</li>
+                        <li>Gracias a nuestra experiencia e infraestructura con la que contamos, podemos garantizar la calidad de nuestro trabajo.</li>
+                        <li>Contamos con el respaldo de clientes que han permanecido con nosotros desde el principio.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h2>¿Por qué elegirnos?</h2>
+                    <p>En Maquinados Garso podemos adaptarnos a sus necesidades, contamos con la experiencia de un gran equipo de trabajo, un amplio manejo de proyectos especiales y un trato personalizado para cada uno de nuestros clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Vision Section -->
+    <section class="mission-vision">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--primary-color);">Misión y Visión</h2>
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <h3>Misión</h3>
+                    <p>Satisfacer las necesidades de nuestros clientes a través de soluciones innovadoras y de calidad a costos competitivos.</p>
+                </div>
+                <div class="mv-card">
+                    <h3>Visión</h3>
+                    <p>Ser una empresa reconocida a nivel regional en soluciones para el sector metal mecánico, agregando valor para cada cliente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services">
+        <div class="container">
+            <h2>Nos especializamos en la fabricación de:</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Engranes</h3>
+                    <p>Fabricación de engranes de todo tipo con precisión y calidad garantizada.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Flechas</h3>
+                    <p>Producción de flechas industriales según especificaciones técnicas.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Reductores</h3>
+                    <p>Reparación y mantenimiento de reductores industriales.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Bujes</h3>
+                    <p>Fabricación de bujes personalizados para diversas aplicaciones.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Piezas Especiales</h3>
+                    <p>Fabricación de todo tipo de piezas para dispositivos de medición en materiales como Nylamid, aluminio, acero comercial y aceros para templado.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Poleas</h3>
+                    <p>Diseño y fabricación de poleas industriales.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Tornillos y Tuercas</h3>
+                    <p>Tornillos y tuercas de todo tipo con cualquier paso de rosca.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Cremalleras</h3>
+                    <p>Fabricación de cremalleras para sistemas de transmisión.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Pernos</h3>
+                    <p>Producción de pernos industriales de alta resistencia.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Moldes y Troqueles</h3>
+                    <p>Fabricación y reparación de piezas para moldes y troqueles.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Estructuras Metálicas</h3>
+                    <p>Fabricamos todo tipo de estructuras, racks y contenedores metálicos ideales para las industrias en general.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Soldadura Especializada</h3>
+                    <p>Trabajamos con soldadura revestida, microalambre y soldadura de inoxidable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Machinery Section -->
+    <section id="maquinaria" class="machinery">
+        <div class="container">
+            <h2>Maquinaria con la que contamos</h2>
+            <div class="machinery-grid">
+                <div class="machine-card">
+                    <h3>Fresadora - Perfiladora</h3>
+                    <div class="machine-specs">
+                        <p><strong>Tamaño de la mesa:</strong> 230 x 1,244 mm</p>
+                        <p><strong>Carrera del husillo:</strong> 127 mm</p>
+                        <p><strong>Velocidades:</strong> 65 - 2,800 RPM</p>
+                        <p><strong>Motor:</strong> 3 HP</p>
+                        <p><strong>Peso:</strong> 950 kg</p>
+                    </div>
+                </div>
+                <div class="machine-card">
+                    <h3>Torno de 1 x 3 m</h3>
+                    <p>Torno de gran capacidad para trabajos de grandes dimensiones con precisión industrial.</p>
+                </div>
+                <div class="machine-card">
+                    <h3>Torno de 14"x40"</h3>
+                    <div class="machine-specs">
+                        <p><strong>Chuck de 4 mordazas</strong></p>
+                        <p><strong>Plato de arrastre</strong></p>
+                        <p><strong>Regletas y display digital</strong></p>
+                        <p><strong>Lámpara de trabajo</strong></p>
+                        <p><strong>Luneta fija y viajera</strong></p>
+                    </div>
+                </div>
+                <div class="machine-card">
+                    <h3>Cepillo de Codo</h3>
+                    <p>Máquina especializada para trabajos de cepillado industrial con alta precisión.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section (Oculta) -->
+    <!--
+    <section id="galeria" class="gallery">
+        <div class="container">
+            <h2>Galería de Trabajos</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="placeholder"></div>
+                    <img 
+                        class="lazy" 
+                        data-src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&h=600&fit=crop" 
+                        alt="Engrane de precisión mecanizado">
+                    <div class="overlay"></div>
+                    <div class="caption">
+                        <h3>Engranes de Precisión</h3>
+                        <p>Fabricación de engranes con tolerancias estrictas</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="placeholder"></div>
+                    <img 
+                        class="lazy" 
+                        data-src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?w=800&h=600&fit=crop" 
+                        alt="Torno CNC trabajando pieza">
+                    <div class="overlay"></div>
+                    <div class="caption">
+                        <h3>Torneado CNC</h3>
+                        <p>Proceso de torneado de alta precisión</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="placeholder"></div>
+                    <img 
+                        class="lazy" 
+                        data-src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=600&fit=crop" 
+                        alt="Pieza de acero inoxidable">
+                    <div class="overlay"></div>
+                    <div class="caption">
+                        <h3>Piezas Especiales</h3>
+                        <p>Componentes únicos según especificaciones</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="placeholder"></div>
+                    <img 
+                        class="lazy" 
+                        data-src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800&h=600&fit=crop" 
+                        alt="Fresadora trabajando">
+                    <div class="overlay"></div>
+                    <div class="caption">
+                        <h3>Fresado Industrial</h3>
+                        <p>Operaciones de fresado de precisión</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="placeholder"></div>
+                    <img 
+                        class="lazy" 
+                        data-src="https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?w=800&h=600&fit=crop" 
+                        alt="Soldadura de precisión">
+                    <div class="overlay"></div>
+                    <div class="caption">
+                        <h3>Soldadura Especializada</h3>
+                        <p>Soldadura TIG en acero inoxidable</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="placeholder"></div>
+                    <img 
+                        class="lazy" 
+                        data-src="https://images.unsplash.com/photo-1565844293892-3426214dc5a0?w=800&h=600&fit=crop" 
+                        alt="Estructura metálica">
+                    <div class="overlay"></div>
+                    <div class="caption">
+                        <h3>Estructuras Metálicas</h3>
+                        <p>Fabricación de racks industriales</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <h2>Contacto</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon" style="width: 50px; height: 50px; margin: 0 auto 15px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%; color: var(--text-light);">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <h3>Representante</h3>
+                    <p>Jesús Rosales García</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon" style="width: 50px; height: 50px; margin: 0 auto 15px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%; color: var(--text-light);">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12" y2="18"></line>
+                        </svg>
+                    </div>
+                    <h3>Teléfono</h3>
+                    <p><a href="tel:2224342473">222 434 2473</a></p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon" style="width: 50px; height: 50px; margin: 0 auto 15px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%; color: var(--text-light);">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="m22 7-10 5L2 7"></path>
+                        </svg>
+                    </div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:maquinados_garso@hotmail.com">maquinados_garso@hotmail.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon" style="width: 50px; height: 50px; margin: 0 auto 15px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%; color: var(--text-light);">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3>Dirección</h3>
+                    <p>Calle Jerusalem #8 Los Pinos<br>
+                    C.P. 72983, Amozoc, Puebla</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Maquinados GARSO. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Generar partículas
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 20) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 70;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll effects
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            const currentScroll = window.pageYOffset;
+            const progressBar = document.getElementById('progressBar');
+            
+            // Header scroll effect
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Progress bar
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollProgress = (currentScroll / scrollHeight) * 100;
+            progressBar.style.width = scrollProgress + '%';
+            
+            lastScroll = currentScroll;
+        });
+
+        // Lazy loading implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageOptions = {
+                root: null,
+                rootMargin: '50px',
+                threshold: 0.01
+            };
+
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.getAttribute('data-src');
+                        
+                        const tempImg = new Image();
+                        tempImg.onload = function() {
+                            img.src = src;
+                            img.classList.add('loaded');
+                            img.classList.remove('lazy');
+                            img.parentElement.classList.add('loaded');
+                        };
+                        
+                        tempImg.onerror = function() {
+                            img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23cccccc" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23666666" font-family="Arial" font-size="20"%3EImagen no disponible%3C/text%3E%3C/svg%3E';
+                            img.classList.add('loaded');
+                            img.classList.remove('lazy');
+                        };
+                        
+                        tempImg.src = src;
+                        observer.unobserve(img);
+                    }
+                });
+            }, imageOptions);
+
+            const lazyImages = document.querySelectorAll('img.lazy');
+            lazyImages.forEach(img => imageObserver.observe(img));
+
+            // Native lazy loading fallback
+            if ('loading' in HTMLImageElement.prototype) {
+                lazyImages.forEach(img => {
+                    img.loading = 'lazy';
+                });
+            }
+
+            // Preload next images on hover
+            document.querySelectorAll('.gallery-item').forEach((item, index) => {
+                item.addEventListener('mouseenter', () => {
+                    const images = document.querySelectorAll('img.lazy');
+                    [index + 1, index + 2].forEach(i => {
+                        if (images[i]) {
+                            const src = images[i].getAttribute('data-src');
+                            if (src) {
+                                const preloadImg = new Image();
+                                preloadImg.src = src;
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
